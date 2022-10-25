@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "projectDeux",
-    "slug": "projectDeux",
+    "name": "project-deux",
+    "slug": "project-deux",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,14 +18,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "blundleIdentifier": "project-deux"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package" : "com.projectDeux"
+      "package": "project-deux"
     },
     "web": {
       "favicon": "./assets/favicon.png"
