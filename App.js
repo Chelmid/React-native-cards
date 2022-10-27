@@ -1,14 +1,19 @@
 import { StyleSheet, Text, View} from 'react-native';
-import LoginScreen from './client/screen/LoginScreen'
+import SiginInScreen from './client/screens/SignInScreen'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './client/screens/HomeScreen'
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
 
   return (
-    <View style={styles.container}>
-      <LoginScreen/>
-    </View>
+    <SiginInScreen />
   );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {

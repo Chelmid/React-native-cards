@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as WebBrowser from 'expo-web-browser';
 import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import { Button, View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
+import SignInButtom from './SignInButtom'
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -32,48 +33,37 @@ export default function GithubAuth() {
   }, [response]);
 
   return (
-    (request
-    ?
-    <View style={styles.container}>
-      <TouchableOpacity
-          styles={styles.buttonGithub}
-          onPress={() => {
-            promptAsync();
-          }}>
-          <Image
-            source={require('../assets/logo-auth/logo-github.png')}
-            style={styles.imageGithub}
-          />
-        </TouchableOpacity>
-        <Button
-        styles={styles.buttonGithub}
-        disabled={!request}
+    <View>
+        <SignInButtom
+        src={require('../assets/logo-auth/logo-github.png')}
         title="sign in Github"
         onPress={() => {
           promptAsync();
-        }}/>
+        }}
+        container={styles.container}
+        image={styles.imageGithub}
+        //request={!request}
+      />
     </View>
-    :
-    ""
-    )
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: "black",
     marginTop: 10,
-    marginButtom: 10,
+    marginButtom: 10
   },
   imageGithub : {
     width: 40,
     height: 40,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: "black",
+    marginButtom: 10,
+    marginRight: 10
   },
   buttonGithub: {
-    backgroundColor: "black !important",
-    flexDirection: "row",
+    
   }
 });
