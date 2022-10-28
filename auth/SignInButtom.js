@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Button, Image, TouchableOpacity } from 'react-native';
 
 export default function SignInButtom(props) {
 
@@ -22,8 +22,4 @@ export default function SignInButtom(props) {
   );
 }
 
-const styles = StyleSheet.create({
-    button : {
-        borderRadius:10
-    }
-});
+const styles = StyleSheet.create({});

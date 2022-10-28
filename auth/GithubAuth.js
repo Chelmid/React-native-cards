@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as WebBrowser from 'expo-web-browser';
 import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
-import { Button, View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import SignInButtom from './SignInButtom'
 
 WebBrowser.maybeCompleteAuthSession();
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "black",
     marginButtom: 10,
-    marginRight: 10
+    marginRight: 5
   },
   buttonGithub: {
     

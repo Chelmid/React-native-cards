@@ -11,8 +11,9 @@ const Stack = createNativeStackNavigator();
 
 export default function SignInScreen() {
 
-  const [userConnexion, setUserConnexion]  = useState({})
+  const [userConnexion, setUserConnexion]  = useState({connexion : true})
 
+  //const userData = data => {setUserConnexion(data)};
   const userData = data => {setUserConnexion(data)};
 
   
@@ -22,13 +23,13 @@ export default function SignInScreen() {
       {Object.values(userConnexion).length <= 0
       ?
       <View>
-        <Text>Choix de la connexion</Text>
+        <Text style={styles.center}>Choix de la connexion</Text>
         <GoogleAuth  onChange={userData}/>
         <GithubAuth/>
         <FacebookAuth/>
       </View>
       :
-      <Text>Hello</Text>
+      <HomeScreen />
       }
     </View>
   );
@@ -40,5 +41,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  center : {
+    textAlign : "center"
   }
 });

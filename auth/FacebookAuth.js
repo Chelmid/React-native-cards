@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as WebBrowser from 'expo-web-browser';
 import * as Facebook from 'expo-auth-session/providers/facebook';
 import { ResponseType } from 'expo-auth-session';
-import { Button, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import SignInButtom from './SignInButtom'
 
 WebBrowser.maybeCompleteAuthSession();
@@ -42,12 +42,12 @@ const styles = StyleSheet.create({
   imageFacebook : {
     width: 40,
     height: 40,
-    marginRight: 10,
+    marginRight: 5,
     borderWidth: 1,
     borderRadius: 5,
     borderColor: "#4285f4",
   },
   buttonFacebook: {
-
+    
   }
 });
