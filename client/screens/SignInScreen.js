@@ -6,6 +6,7 @@ import { useState } from 'react';
 import HomeScreen from './HomeScreen'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MenuBar from './MenuBar';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +20,7 @@ export default function SignInScreen() {
   
   console.log(userConnexion)
   return (
-    <View style={styles.container}>
+    <View style={styles.parantTagStyle}>
       {Object.values(userConnexion).length <= 0
       ?
       <View>
@@ -29,20 +30,30 @@ export default function SignInScreen() {
         <FacebookAuth/>
       </View>
       :
-      <HomeScreen />
+      <View style={styles.parantTagStyle}>
+        <NavigationContainer>
+          <MenuBar />
+        </NavigationContainer>
+      </View>
       }
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  parantTagStyle: {
+    left: 0,
+    bottom: 0,
+    right: 0,
+    flex:1
   },
-  center : {
-    textAlign : "center"
+  footerTagStyle: {
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+  MenuBar : {
+    backGroundColor : "grey"
   }
 });
