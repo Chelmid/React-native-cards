@@ -14,23 +14,22 @@ export default function SignInScreen() {
 
   const [userConnexion, setUserConnexion]  = useState({connexion : true})
 
-  //const userData = data => {setUserConnexion(data)};
   const userData = data => {setUserConnexion(data)};
 
   
   console.log(userConnexion)
   return (
-    <View style={styles.parantTagStyle}>
+    <View style={styles.positionMenubar}>
       {Object.values(userConnexion).length <= 0
       ?
-      <View>
-        <Text style={styles.center}>Choix de la connexion</Text>
+      <View style={styles.centerSignIn}>
+        <Text>Choix de la connexion</Text>
         <GoogleAuth  onChange={userData}/>
         <GithubAuth/>
         <FacebookAuth/>
       </View>
       :
-      <View style={styles.parantTagStyle}>
+      <View style={styles.positionMenubar}>
         <NavigationContainer>
           <MenuBar />
         </NavigationContainer>
@@ -41,17 +40,17 @@ export default function SignInScreen() {
 }
 
 const styles = StyleSheet.create({
-  parantTagStyle: {
+  positionMenubar: {
     left: 0,
     bottom: 0,
     right: 0,
     flex:1
   },
-  footerTagStyle: {
+  centerSignIn: {
     position: 'absolute',
-    left: 0,
-    bottom: 0,
+    left: 100,
     right: 0,
+    top : '45%'
   },
   MenuBar : {
     backGroundColor : "grey"
