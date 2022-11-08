@@ -15,16 +15,12 @@ const Tab = createBottomTabNavigator();
 
 export default function MenuBar() {
 
-  const selectionIcon = () => {
-
-  }
-
   return (
-    <Tab.Navigator style={styles.MenuBar}
+    <Tab.Navigator
+     tabBarColor={{ backgroundColor: '#694fad' }}
       screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
 
-            selectionIcon()
             let iconName;
 
             if (route.name === 'Home') {
@@ -38,27 +34,47 @@ export default function MenuBar() {
             }
 
             // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color={color} />;
+            console.log(route.name)
+            return <Ionicons name={iconName} size={size} color={color}/>;
           },
-          tabBarActiveTintColor: 'lightblue',
+          tabBarActiveTintColor: 'white',
           tabBarInactiveTintColor: 'gray',
-            height: 1000,
-            paddingTop: 50,
+          tabBarStyle: {
+              backgroundColor: route.name === 'Home' ? "blue" :'green',
+              paddingBottom : 10,
+              paddingTop : 10,
+              height : 60,
+              borderBottomWidth: 5,
+              borderBottomColor : 'aqua'
+            },
         })}
       >
       <Tab.Screen name="Home" component={HomeScreen} style={styles.MenuBar}/>
       <Tab.Screen name="List" component={SettingsScreen} />
       <Tab.Screen name="date" component={HomeScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
+      
     </Tab.Navigator>
+    //   <Tab.Navigator
+    //     initialRouteName="Home"
+    //     activeColor="red"
+    //     inactiveColor="black"
+    //     tabBarStyle={{ backgroundColor: 'bleu' }}
+    //     screenOptions={{
+    //       tabBarStyle: {
+    //         backgroundColor: 'green',
+    //       },
+    //     }}
+    //   >
+    //     <Tab.Screen name="Home" component={HomeScreen} />
+    //     <Tab.Screen name="Settings" component={SettingsScreen} />
+    //   </Tab.Navigator>
   );
 }
 
 const styles = StyleSheet.create({
   MenuBar : {
-    marginBottom : 10,
-    marginTop : 10,
-    height: 1000,
-    paddingTop: 50,
+    borderBottomWidth: 5,
+    borderBottomColor : 'aqua'
   }
 });
