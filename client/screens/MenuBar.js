@@ -15,6 +15,19 @@ const Tab = createBottomTabNavigator();
 
 export default function MenuBar() {
 
+  const selectedColor = (routes) => {
+    switch(routes) {
+      case 'Home' : return 'red'
+      break;
+      case 'List' : return 'blue'
+      break;
+      case 'Date' : return 'green'
+      break;
+      case 'Settings' : return 'black'
+      break;
+    }
+  }
+
   return (
     <Tab.Navigator
      tabBarColor={{ backgroundColor: '#694fad' }}
@@ -22,53 +35,43 @@ export default function MenuBar() {
           tabBarIcon: ({ focused, color, size }) => {
 
             let iconName;
+            let selectedTabBarActive = false
 
             if (route.name === 'Home') {
               iconName = focused ? 'ios-home' : 'ios-home';
+              selectedTabBarActive = true
             } else if (route.name === 'Settings') {
               iconName = focused ? 'ios-list' : 'ios-list-outline';
+              selectedTabBarActive = true
             } else if (route.name === 'List') {
+              selectedTabBarActive = true
+            } else if (route.name === 'Date') {
               iconName = focused ? 'ios-list' : 'ios-list-outline';
-            } else if (route.name === 'date') {
-              iconName = focused ? 'ios-list' : 'ios-list-outline';
+              selectedTabBarActive = true
             }
 
             // You can return any component that you like here!
             console.log(route.name)
-            return <Ionicons name={iconName} size={size} color={color}/>;
+            return <View style={selectedTabBarActive === true ? styles.MenuBar : ""}>
+              <Ionicons name={iconName} size={size} color={color}/>
+            </View>;
           },
           tabBarActiveTintColor: 'white',
           tabBarInactiveTintColor: 'gray',
           tabBarStyle: {
-              backgroundColor: route.name === 'Home' ? "blue" :'green',
-              paddingBottom : 10,
-              paddingTop : 10,
-              height : 60,
-              borderBottomWidth: 5,
-              borderBottomColor : 'aqua'
+              backgroundColor: selectedColor(route.name),
+              paddingBottom : 5,
+              paddingTop : 5,
+              height : 60
             },
         })}
       >
-      <Tab.Screen name="Home" component={HomeScreen} style={styles.MenuBar}/>
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="List" component={SettingsScreen} />
-      <Tab.Screen name="date" component={HomeScreen} />
+      <Tab.Screen name="Date" component={HomeScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
       
     </Tab.Navigator>
-    //   <Tab.Navigator
-    //     initialRouteName="Home"
-    //     activeColor="red"
-    //     inactiveColor="black"
-    //     tabBarStyle={{ backgroundColor: 'bleu' }}
-    //     screenOptions={{
-    //       tabBarStyle: {
-    //         backgroundColor: 'green',
-    //       },
-    //     }}
-    //   >
-    //     <Tab.Screen name="Home" component={HomeScreen} />
-    //     <Tab.Screen name="Settings" component={SettingsScreen} />
-    //   </Tab.Navigator>
   );
 }
 
@@ -76,5 +79,6 @@ const styles = StyleSheet.create({
   MenuBar : {
     borderBottomWidth: 5,
     borderBottomColor : 'aqua'
+    
   }
 });
