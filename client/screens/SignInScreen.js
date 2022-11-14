@@ -3,12 +3,8 @@ import GoogleAuth from '../../auth/GoogleAuth';
 import GithubAuth from '../../auth/GithubAuth';
 import FacebookAuth from '../../auth/FacebookAuth';
 import { useState } from 'react';
-import HomeScreen from './HomeScreen'
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MenuBar from './MenuBar';
-
-const Stack = createNativeStackNavigator();
 
 export default function SignInScreen() {
 
@@ -51,8 +47,5 @@ const styles = StyleSheet.create({
     left: 100,
     right: 0,
     top : '45%'
-  },
-  MenuBar : {
-    backGroundColor : "grey"
   }
 });
