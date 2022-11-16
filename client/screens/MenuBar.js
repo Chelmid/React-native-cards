@@ -3,6 +3,8 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { Text, View, StyleSheet, Image, Button } from 'react-native';
 import HomeScreen from './HomeScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import PokemonScreen from './PokemonScreen';
+import YugiohScreen from './YugiohScreen';
 
 function SettingsScreen() {
   return (
@@ -70,8 +72,8 @@ export default function MenuBar() {
         })}
       >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="PokemonTGC" component={SettingsScreen} />
-      <Tab.Screen name="Yugioh" component={HomeScreen} />
+      <Tab.Screen name="PokemonTGC" component={PokemonScreen} />
+      <Tab.Screen name="Yugioh" component={YugiohScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} /> 
       
     </Tab.Navigator>
