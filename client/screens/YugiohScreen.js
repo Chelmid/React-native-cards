@@ -7,6 +7,9 @@ export default function YugiohScreen() {
         const response = await fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php');
         const resultat = await response.json();
         console.log(resultat.data[0])
+        for (let test of resultat.data) {
+          console.log(test.id)
+        }
     }
     test()
 
