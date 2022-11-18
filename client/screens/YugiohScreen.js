@@ -1,27 +1,31 @@
-import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Text, View, StyleSheet, Image, ScrollView, SafeAreaView } from 'react-native';
+import ApiYugioh from '../../API/ApiYugioh'
 
 export default function YugiohScreen() {
 
-    const test = async () => {
-        const response = await fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php');
-        const resultat = await response.json();
-        console.log(resultat.data[0])
-        for (let test of resultat.data) {
-          console.log(test.id)
-        }
-    }
-    test()
-
   return (
-    <View style={styles.container}>
-      <Text>Yugioh</Text>
-    </View>
+    <SafeAreaView>
+      <ScrollView>
+        {ApiYugioh()}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    margin : 10
-  }
+    margin: 10,
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  stretch: {
+    width: 100,
+    height: 150,
+    resizeMode: 'stretch'
+  },
+  row: {
+    // flexDirection: "row",
+    // flexWrap: "wrap",
+  },
 });
