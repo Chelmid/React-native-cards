@@ -5,6 +5,8 @@ import HomeScreen from './HomeScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PokemonScreen from './PokemonScreen';
 import YugiohScreen from './YugiohScreen';
+import Pokeball from "../../assets/pokeball.svg"
+import Yugioh from "../../assets/yugiohLogo.svg"
 
 function SettingsScreen() {
   return (
@@ -39,17 +41,27 @@ export default function MenuBar() {
               break;
               case "Settings" : iconName = focused ? 'ios-settings' : 'ios-settings';
               break;
-              // case "PokemonTGC" : iconName = focused ? 'list' : 'list-outline';
+              // case "PokemonTGC" : iconName = focused ? <Pokeball width={60} height={35} fill="red" style={focused === true ? styles.MenuBarBottom : ""}/> : 'list-outline';
               // break;
-              case "Yugioh" : iconName = focused ? 'ios-list' : 'ios-list-outline';
-              break;
+              // case "Yugioh" : iconName = focused ? 'ios-list' : 'ios-list-outline';
+              // break;
             }
 
-            if(route.name === "PokemonTGC"){
-              return <Image source={require('../../assets/pokeball.svg')} style={styles.image} />
-            }else{
-              return <Ionicons name={iconName} size={35} color={color} style={focused === true ? styles.MenuBarBottom : ""}/>
+            switch (route.name) {
+              case "PokemonTGC":
+                return <Pokeball width={60} height={35} fill={focused === true ? "red" : "black"} style={focused === true ? styles.MenuBarBottom : ""}/>
+                break;
+
+              case "Yugioh":
+                return <Yugioh width={60} height={40} fill={focused === true ? "#f6b902" : "black"} style={focused === true ? styles.MenuBarBottom : ""}/>
+                break;
+            
+              default:
+                break;
             }
+
+            return <Ionicons name={iconName} size={35} color={color} style={focused === true ? styles.MenuBarBottom : ""}/>
+
           },
           tabBarActiveTintColor: 'white',
           tabBarInactiveTintColor: 'black',

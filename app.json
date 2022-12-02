@@ -2,7 +2,7 @@
   "expo": {
     "name": "projectDeux",
     "slug": "projectDeux",
-    "scheme": "projectDeux",
+    "scheme": "ProjectDeux",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,7 +20,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "blundleIdentifier": "project-deux"
+      "blundleIdentifier": "projectDeux"
     },
     "android": {
       "adaptiveIcon": {
