@@ -1,29 +1,47 @@
 import { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, Button } from 'react-native';
 
 export default function ApiYugioh() {
 
     const [pagination, setPagintion] = useState([])
-    let cards = []
-    const test = async (start, end) => {
+    const [initial, setInitial] = useState(0)
+    const [last, setLast] = useState(9)
+
+    const displayCard = async (start, end) => {
+        setInitial(start)
+        setLast(end)
+        setPagintion([])
+        let cards = []
         const response = await fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php');
         const resultat = await response.json();
         for (start; start < end; start++) {
             cards.push(resultat.data[start])
         }
+
         setPagintion(cards)
     }
 
+    const upAndDown = async (value) => {
+        if (value === "up") {
+            await displayCard(initial + 9, last + 9)
+        } else {
+            await displayCard(initial - 9, last - 9)
+        }
+    }
+
     useEffect(() => {
-        test(0, 10)
+        displayCard(initial, last)
     }, []);
 
     return (
         <View style={styles.container}>
-            {pagination.length === 0 && <Text>Loading</Text>}
-            {pagination.map((element, i) =>
+            {pagination.length < 8 &&
+                <View style={styles.centerElementScreen}>
+                    <Text >Loading</Text>
+                </View>
+            }
+            {pagination.length > 8 && pagination.map((element, i) =>
                 <View key={i}>
-                    <Text>{element.id}</Text>
                     {Object.values(element.card_images).map((image, i) => (
                         <View key={i}>
                             <Image style={styles.stretch} source={{ uri: image.image_url_small }} key={i}></Image>
@@ -31,6 +49,12 @@ export default function ApiYugioh() {
                     ))}
                 </View>
             )}
+            {pagination.length > 8 &&
+                <View style={styles.containerPagination}>
+                    <Button title='-' onPress={() => upAndDown("down")} />
+                    <Button title='+' onPress={() => upAndDown("up")} />
+                </View>
+            }
         </View>
     );
 }
@@ -44,6 +68,18 @@ const styles = StyleSheet.create({
     stretch: {
         width: 100,
         height: 150,
-        resizeMode: 'stretch'
+        resizeMode: 'stretch',
+        margin: 10
+    },
+    containerPagination: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+    },
+    centerElementScreen: {
+        alignItems: 'center',
+        flex: 1,
+        justifyContent: 'center',
+        flexDirection: 'column',
+        marginTop: 250
     }
 });
