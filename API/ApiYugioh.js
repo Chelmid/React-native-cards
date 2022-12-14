@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, Image, Button } from 'react-native';
+import { Text, View, StyleSheet, Image, Button, TouchableHighlight } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function ApiYugioh() {
+export default function ApiYugioh(props) {
 
     const [pagination, setPagintion] = useState([])
     const [initial, setInitial] = useState(0)
     const [last, setLast] = useState(9)
+    const navigation = useNavigation()
 
     const displayCard = async (start, end) => {
         setInitial(start)
@@ -29,6 +31,11 @@ export default function ApiYugioh() {
         }
     }
 
+    const test = (id) => {
+        console.log(id)
+        console.log(pagination.find(element => element.id === id))
+    }
+
     useEffect(() => {
         displayCard(initial, last)
     }, []);
@@ -43,9 +50,9 @@ export default function ApiYugioh() {
             {pagination.length > 8 && pagination.map((element, i) =>
                 <View key={i}>
                     {Object.values(element.card_images).map((image, i) => (
-                        <View key={i}>
+                        <TouchableHighlight  key={i} onPress={() => test(element.id)}>
                             <Image style={styles.stretch} source={{ uri: image.image_url_small }} key={i}></Image>
-                        </View>
+                        </TouchableHighlight >
                     ))}
                 </View>
             )}
