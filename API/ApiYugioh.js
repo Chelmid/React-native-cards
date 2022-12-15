@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Image, Button, TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import YugiohDetailScreen from '../client/screens/YugiohDetailScreen';
 
 export default function ApiYugioh(props) {
 
     const [pagination, setPagintion] = useState([])
     const [initial, setInitial] = useState(0)
     const [last, setLast] = useState(9)
+    const [cardDetail, setCardDetail] = useState([])
     const navigation = useNavigation()
 
     const displayCard = async (start, end) => {
@@ -32,8 +34,10 @@ export default function ApiYugioh(props) {
     }
 
     const test = (id) => {
-        console.log(id)
-        console.log(pagination.find(element => element.id === id))
+        let detail = []
+        const card = pagination.find(element => element.id === id)
+        detail.push(card)
+        setCardDetail(detail)
     }
 
     useEffect(() => {
@@ -47,7 +51,7 @@ export default function ApiYugioh(props) {
                     <Text >Loading</Text>
                 </View>
             }
-            {pagination.length > 8 && pagination.map((element, i) =>
+            {cardDetail.length < 1 && pagination.length > 8 && pagination.map((element, i) =>
                 <View key={i}>
                     {Object.values(element.card_images).map((image, i) => (
                         <TouchableHighlight  key={i} onPress={() => test(element.id)}>
@@ -62,6 +66,8 @@ export default function ApiYugioh(props) {
                     <Button title='+' onPress={() => upAndDown("up")} />
                 </View>
             }
+            {cardDetail.length > 0 && <YugiohDetailScreen cardDetail={cardDetail} /> }
+            {pagination.length > 8 && cardDetail.length > 0 && <Button title='retour' onPress={() => setCardDetail([])} />}
         </View>
     );
 }
