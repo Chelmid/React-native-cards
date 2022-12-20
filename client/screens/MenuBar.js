@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Text, View, StyleSheet, Image, Button } from 'react-native';
 import HomeScreen from './HomeScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -41,10 +40,6 @@ export default function MenuBar() {
               break;
               case "Settings" : iconName = focused ? 'ios-settings' : 'ios-settings';
               break;
-              // case "PokemonTGC" : iconName = focused ? <Pokeball width={60} height={35} fill="red" style={focused === true ? styles.MenuBarBottom : ""}/> : 'list-outline';
-              // break;
-              // case "Yugioh" : iconName = focused ? 'ios-list' : 'ios-list-outline';
-              // break;
             }
 
             switch (route.name) {
@@ -78,9 +73,6 @@ export default function MenuBar() {
             backgroundColor: selectedColor(route.name),
           },
           headerTitleAlign: 'center',
-          headerRight: () => (
-            <Button title="Update count" />
-          ),
         })}
       >
       <Tab.Screen name="Home" component={HomeScreen} />

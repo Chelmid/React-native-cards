@@ -51,6 +51,7 @@ export default function ApiYugioh(props) {
                     <Text >Loading</Text>
                 </View>
             }
+            {pagination.length > 8 && cardDetail.length > 0 && <Button title='retour' onPress={() => setCardDetail([])} />}
             {cardDetail.length < 1 && pagination.length > 8 && pagination.map((element, i) =>
                 <View key={i}>
                     {Object.values(element.card_images).map((image, i) => (
@@ -60,14 +61,13 @@ export default function ApiYugioh(props) {
                     ))}
                 </View>
             )}
-            {pagination.length > 8 &&
+            {pagination.length > 8 && cardDetail.length < 1 &&
                 <View style={styles.containerPagination}>
                     <Button title='-' onPress={() => upAndDown("down")} />
                     <Button title='+' onPress={() => upAndDown("up")} />
                 </View>
             }
             {cardDetail.length > 0 && <YugiohDetailScreen cardDetail={cardDetail} /> }
-            {pagination.length > 8 && cardDetail.length > 0 && <Button title='retour' onPress={() => setCardDetail([])} />}
         </View>
     );
 }
