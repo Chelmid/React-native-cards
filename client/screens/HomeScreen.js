@@ -5,7 +5,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome</Text>
-      <Text>You can check each price, the cards Pokemon or Yugioh</Text>      
+      <Text>You can check each price, the cards Pokemon or Yugioh</Text>
     </View>
   );
 }
