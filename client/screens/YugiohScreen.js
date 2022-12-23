@@ -7,7 +7,7 @@ export default function YugiohScreen() {
   return (
     <SafeAreaView>
       <ScrollView>
-        {ApiYugioh()}
+        <ApiYugioh />
       </ScrollView>
     </SafeAreaView>
   );
