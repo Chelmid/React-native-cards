@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, Linking } from 'react-native';
 import pokemon from 'pokemontcgsdk'
 import { useEffect, useState } from 'react';
 
@@ -29,19 +29,23 @@ export const ApiPokemonTGC = () => {
 
     return (
         <View>
-            {cards.map((card, i) =>
+            {cards.length < 1 
+            ?
+            <Text>Loading ...</Text>
+            :
+            cards.map((card, i) =>
                 <View style={styles.container} key={i}>
                     <Image style={styles.stretch} source={{ uri: card.images.large }} />
                     <View>{Object.keys(card.tcgplayer.prices).map((name, i) =>
                         <View key={i}>
                             <Text>{console.log(card)}</Text>
-                            <Text key={i}>Name : {card.name}</Text>
-                            <Text>{card.tcgplayer.prices[name].high.length < 1 ? "" : "high : " + card.tcgplayer.prices[name].high} €</Text>
-                            <Text>{card.tcgplayer.prices[name].mid.length < 1 ? "" : "mid : " + card.tcgplayer.prices[name].mid} €</Text>
-                            <Text>{card.tcgplayer.prices[name].low.length < 1 ? "" : "low : " + card.tcgplayer.prices[name].low} €</Text>
-                            <Text>{card.tcgplayer.prices[name].market.length < 1 ? "" : "market : " + card.tcgplayer.prices[name].market} €</Text>
-                            {/* <Text>{card.tcgplayer.url}</Text> */}
+                            <Text key={i}>Card name : {card.name}</Text>
+                            <Text>{card.tcgplayer.prices[name].high.length < 1 ? "" : "high price : " + card.tcgplayer.prices[name].high} €</Text>
+                            <Text>{card.tcgplayer.prices[name].mid.length < 1 ? "" : "mid price : " + card.tcgplayer.prices[name].mid} €</Text>
+                            <Text>{card.tcgplayer.prices[name].low.length < 1 ? "" : "low price : " + card.tcgplayer.prices[name].low} €</Text>
+                            <Text>{card.tcgplayer.prices[name].market.length < 1 ? "" : "market price : " + card.tcgplayer.prices[name].market} €</Text>
                             <Text>rarity : {card.rarity}</Text>
+                            <Text style={styles.link} onPress={() => Linking.openURL(card.tcgplayer.url)} >more info</Text>
                         </View>
                     )}
                     </View>
@@ -73,5 +77,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'column',
         marginTop: 250
+    },
+    link : {
+        color : "blue",
     }
 });

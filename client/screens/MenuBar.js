@@ -86,13 +86,13 @@ export default function MenuBar() {
 
 const styles = StyleSheet.create({
   MenuBarBottom : {
-    borderWidth: 2,
-    borderLeftWidth : 2,
-    borderRightWidth: 2,
-    borderTopWidth : 2,
-    borderRightColor : 'white',
-    borderBottomColor : 'white',
-    paddingLeft : 4
+    // borderWidth: 2,
+    // borderLeftWidth : 2,
+    // borderRightWidth: 2,
+    // borderTopWidth : 2,
+    // borderRightColor : 'white',
+    // borderBottomColor : 'white',
+    // paddingLeft : 4
   },
   image : {
     width: '40%',
