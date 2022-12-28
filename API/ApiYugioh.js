@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Text, View, StyleSheet, Image, Button, TouchableHighlight, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import YugiohDetailScreen from '../client/screens/YugiohDetailScreen';
@@ -52,9 +52,27 @@ export default function ApiYugioh(props) {
         setCardDetail(detail)
     }
 
-    const onChangeText = (e) => {
-        console.log(e)
+    const onChangeText = async (e) => {
+        setPagintion([])
+        const response = await fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=' + e);
+        const resultat = await response.json();
+        setPagintion(resultat.data)
     }
+
+    const debounce = (func) => {
+        let timer;
+        return function (...args) {
+          const context = this;
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(() => {
+            timer = null;
+            func.apply(context, args);
+          }, 2000);
+        };
+      };
+    
+    
+      const optimizedFn = useCallback(debounce(onChangeText), []);
 
     useEffect(() => {
         displayCard(initial, last)
@@ -62,17 +80,27 @@ export default function ApiYugioh(props) {
 
     return (
         <View>
-            {cardDetail.length < 1 && pagination.length > 1 && <TextInput placeholder={"Name card"} style={styles.input} onChangeText={text => onChangeText(text )}></TextInput>}
+            {cardDetail.length < 1 && pagination.length > 1 && <TextInput placeholder={"Name card"} style={styles.input} onChangeText={text => optimizedFn(text)}></TextInput>}
             <View style={styles.container}>
-                {pagination.length < 8 &&
+                {pagination.length < 1 &&
                     <View style={styles.centerElementScreen}>
                         <Text >Loading</Text>
                     </View>
                 }
-                {pagination.length > 8 && cardDetail.length > 0 && <Button title='retour' onPress={() => setCardDetail([])} />}
-                {cardDetail.length < 1 && pagination.length > 1 && pagination.map((element, i) =>
+                {cardDetail.length > 0 && <Button title='retour' onPress={() => setCardDetail([])} />}
+                {cardDetail.length < 1  && pagination.map((element, i) =>
                     <View key={i}>
+                        {Object.values(element.card_images).length > 1 
+                        ?
+                        <View style={styles.container}>
                         {Object.values(element.card_images).map((image, i) => (
+                            <TouchableHighlight key={i} onPress={() => detailCard(element.id)}>
+                                <Image style={styles.stretch} source={{ uri: image.image_url_small }} key={i}></Image>
+                            </TouchableHighlight >
+                        ))}
+                        </View>
+                        :
+                        Object.values(element.card_images).map((image, i) => (
                             <TouchableHighlight key={i} onPress={() => detailCard(element.id)}>
                                 <Image style={styles.stretch} source={{ uri: image.image_url_small }} key={i}></Image>
                             </TouchableHighlight >
