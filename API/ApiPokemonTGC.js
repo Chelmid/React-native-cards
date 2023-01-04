@@ -19,7 +19,6 @@ export const ApiPokemonTGC = () => {
 
         end = start + end
         setCards(cards)
-        console.log(cards[0].name)
     }
 
     useEffect(() => {
@@ -38,7 +37,6 @@ export const ApiPokemonTGC = () => {
                     <Image style={styles.stretch} source={{ uri: card.images.large }} />
                     <View>{Object.keys(card.tcgplayer.prices).map((name, i) =>
                         <View key={i}>
-                            <Text>{console.log(card)}</Text>
                             <Text key={i}>Card name : {card.name}</Text>
                             <Text>{card.tcgplayer.prices[name].high.length < 1 ? "" : "high price : " + card.tcgplayer.prices[name].high} €</Text>
                             <Text>{card.tcgplayer.prices[name].mid.length < 1 ? "" : "mid price : " + card.tcgplayer.prices[name].mid} €</Text>
